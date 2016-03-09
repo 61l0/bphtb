@@ -1,0 +1,799 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="bphtb_register" language="groovy" pageWidth="1008" pageHeight="612" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="915" leftMargin="72" rightMargin="21" topMargin="36" bottomMargin="86">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="1060"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="kondisi" class="java.lang.String">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<parameter name="order" class="java.lang.String">
+		<defaultValueExpression><![CDATA[$F{bphtb_sspd_id}]]></defaultValueExpression>
+	</parameter>
+	<parameter name="daerah" class="java.lang.String">
+		<defaultValueExpression><![CDATA["PEMERINTAH KOTA TANGERANG SELATAN"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="ibu_kota" class="java.lang.String">
+		<defaultValueExpression><![CDATA["SERPONG"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     row_number() OVER (ORDER BY $P{order})::text as no_urut,
+     bphtb_sspd."bumi_luas"*bphtb_sspd."bumi_njop" AS bumi,
+     bphtb_sspd."bng_luas"*bphtb_sspd."bng_njop" AS bangunan,
+     (bphtb_sspd."bumi_luas"*bphtb_sspd."bumi_njop")+(bphtb_sspd."bng_luas"*bphtb_sspd."bng_njop") AS pbb,
+     bphtb_sspd."npop"*bphtb_sspd."npoptkp" AS npopkp,
+     bphtb_sspd."id" AS bphtb_sspd_id,
+     bphtb_sspd."tahun" AS bphtb_sspd_tahun,
+     bphtb_sspd."kode" AS bphtb_sspd_kode,
+     lpad(bphtb_sspd."no_sspd"::text,6,'0') AS bphtb_sspd_no_sspd,
+     bphtb_sspd."ppat_id" AS bphtb_sspd_ppat_id,
+     bphtb_sspd."wp_nama" AS bphtb_sspd_wp_nama,
+     bphtb_sspd."wp_npwp" AS bphtb_sspd_wp_npwp,
+     bphtb_sspd."wp_alamat" AS bphtb_sspd_wp_alamat,
+     bphtb_sspd."wp_blok_kav" AS bphtb_sspd_wp_blok_kav,
+     bphtb_sspd."wp_kelurahan" AS bphtb_sspd_wp_kelurahan,
+     bphtb_sspd."wp_rt" AS bphtb_sspd_wp_rt,
+     bphtb_sspd."wp_rw" AS bphtb_sspd_wp_rw,
+     bphtb_sspd."wp_kecamatan" AS bphtb_sspd_wp_kecamatan,
+     bphtb_sspd."wp_kota" AS bphtb_sspd_wp_kota,
+     bphtb_sspd."wp_provinsi" AS bphtb_sspd_wp_provinsi,
+     bphtb_sspd."wp_identitas" AS bphtb_sspd_wp_identitas,
+     bphtb_sspd."wp_identitaskd" AS bphtb_sspd_wp_identitaskd,
+     bphtb_sspd."tgl_transaksi" AS bphtb_sspd_tgl_transaksi,
+     bphtb_sspd."kd_propinsi" AS bphtb_sspd_kd_propinsi,
+     bphtb_sspd."kd_dati2" AS bphtb_sspd_kd_dati2,
+     bphtb_sspd."kd_kecamatan" AS bphtb_sspd_kd_kecamatan,
+     bphtb_sspd."kd_kelurahan" AS bphtb_sspd_kd_kelurahan,
+     bphtb_sspd."kd_blok" AS bphtb_sspd_kd_blok,
+     bphtb_sspd."no_urut" AS bphtb_sspd_no_urut,
+     bphtb_sspd."kd_jns_op" AS bphtb_sspd_kd_jns_op,
+     bphtb_sspd."thn_pajak_sppt" AS bphtb_sspd_thn_pajak_sppt,
+     bphtb_sspd."op_alamat" AS bphtb_sspd_op_alamat,
+     bphtb_sspd."op_blok_kav" AS bphtb_sspd_op_blok_kav,
+     bphtb_sspd."op_rt" AS bphtb_sspd_op_rt,
+     bphtb_sspd."op_rw" AS bphtb_sspd_op_rw,
+     bphtb_sspd."bumi_luas" AS bphtb_sspd_bumi_luas,
+     bphtb_sspd."bumi_njop" AS bphtb_sspd_bumi_njop,
+     bphtb_sspd."bng_luas" AS bphtb_sspd_bng_luas,
+     bphtb_sspd."bng_njop" AS bphtb_sspd_bng_njop,
+     bphtb_sspd."no_sertifikat" AS bphtb_sspd_no_sertifikat,
+     bphtb_sspd."njop" AS bphtb_sspd_njop,
+     bphtb_sspd."perolehan_id" AS bphtb_sspd_perolehan_id,
+     bphtb_sspd."npop" AS bphtb_sspd_npop,
+     bphtb_sspd."npoptkp" AS bphtb_sspd_npoptkp,
+     bphtb_sspd."tarif" AS bphtb_sspd_tarif,
+     bphtb_sspd."terhutang" AS bphtb_sspd_terhutang,
+     bphtb_sspd."bagian" AS bphtb_sspd_bagian,
+     bphtb_sspd."pembagi" AS bphtb_sspd_pembagi,
+     bphtb_sspd."tarif_pengurang" AS bphtb_sspd_tarif_pengurang,
+     bphtb_sspd."pengurang" AS bphtb_sspd_pengurang,
+     bphtb_sspd."bphtb_sudah_dibayarkan" AS bphtb_sspd_bphtb_sudah_dibayarkan,
+     bphtb_sspd."denda" AS bphtb_sspd_denda,
+     bphtb_sspd."restitusi" AS bphtb_sspd_restitusi,
+     bphtb_sspd."bphtb_harus_dibayarkan" AS bphtb_sspd_bphtb_harus_dibayarkan,
+     bphtb_sspd."status_pembayaran" AS bphtb_sspd_status_pembayaran,
+     bphtb_sspd."dasar_id" AS bphtb_sspd_dasar_id,
+     bphtb_sspd."create_uid" AS bphtb_sspd_create_uid,
+     bphtb_sspd."update_uid" AS bphtb_sspd_update_uid,
+     bphtb_sspd."created" AS bphtb_sspd_created,
+     bphtb_sspd."updated" AS bphtb_sspd_updated,
+     bphtb_sspd."header_id" AS bphtb_sspd_header_id,
+     ref_dati2."nm_dati2" AS ref_dati2_nm_dati2,
+     ref_kecamatan."nm_kecamatan" AS ref_kecamatan_nm_kecamatan,
+     ref_kelurahan."nm_kelurahan" AS ref_kelurahan_nm_kelurahan,
+     ref_kelurahan."kd_pos_kelurahan" AS ref_kelurahan_kd_pos_kelurahan,
+     bphtb_perolehan."nama" AS bphtb_perolehan_nama,
+     bphtb_ppat."nama" AS bphtb_ppat_nama,
+     ref_propinsi."nm_propinsi" AS ref_propinsi_nm_propinsi,
+     bphtb_dasar."nama" AS bphtb_dasar_nama
+FROM
+     "ref_dati2" ref_dati2 INNER JOIN "ref_kecamatan" ref_kecamatan ON ref_dati2."kd_propinsi" = ref_kecamatan."kd_propinsi"
+     AND ref_dati2."kd_dati2" = ref_kecamatan."kd_dati2"
+     INNER JOIN "ref_kelurahan" ref_kelurahan ON ref_kecamatan."kd_propinsi" = ref_kelurahan."kd_propinsi"
+     AND ref_kecamatan."kd_dati2" = ref_kelurahan."kd_dati2"
+     AND ref_kecamatan."kd_kecamatan" = ref_kelurahan."kd_kecamatan"
+     INNER JOIN "bphtb_sspd" bphtb_sspd ON ref_kelurahan."kd_propinsi" = bphtb_sspd."kd_propinsi"
+     AND ref_kelurahan."kd_dati2" = bphtb_sspd."kd_dati2"
+     AND ref_kelurahan."kd_kecamatan" = bphtb_sspd."kd_kecamatan"
+     AND ref_kelurahan."kd_kelurahan" = bphtb_sspd."kd_kelurahan"
+     INNER JOIN "bphtb_perolehan" bphtb_perolehan ON bphtb_sspd."perolehan_id" = bphtb_perolehan."id"
+     INNER JOIN "bphtb_ppat" bphtb_ppat ON bphtb_sspd."ppat_id" = bphtb_ppat."id"
+     INNER JOIN "bphtb_ppat" bphtb_ppat_A ON bphtb_sspd."ppat_id" = bphtb_ppat_A."id"
+     INNER JOIN "bphtb_dasar" bphtb_dasar ON bphtb_sspd."dasar_id" = bphtb_dasar."id"
+     INNER JOIN "ref_propinsi" ref_propinsi ON ref_dati2."kd_propinsi" = ref_propinsi."kd_propinsi"
+$P!{kondisi}
+$P!{order}]]>
+	</queryString>
+	<field name="no_urut" class="java.lang.String"/>
+	<field name="bumi" class="java.lang.Long"/>
+	<field name="bangunan" class="java.lang.Long"/>
+	<field name="pbb" class="java.lang.Long"/>
+	<field name="npopkp" class="java.lang.Long"/>
+	<field name="bphtb_sspd_id" class="java.lang.Long"/>
+	<field name="bphtb_sspd_tahun" class="java.lang.Integer"/>
+	<field name="bphtb_sspd_kode" class="java.lang.String"/>
+	<field name="bphtb_sspd_no_sspd" class="java.lang.String"/>
+	<field name="bphtb_sspd_ppat_id" class="java.lang.Integer"/>
+	<field name="bphtb_sspd_wp_nama" class="java.lang.String"/>
+	<field name="bphtb_sspd_wp_npwp" class="java.lang.String"/>
+	<field name="bphtb_sspd_wp_alamat" class="java.lang.String"/>
+	<field name="bphtb_sspd_wp_blok_kav" class="java.lang.String"/>
+	<field name="bphtb_sspd_wp_kelurahan" class="java.lang.String"/>
+	<field name="bphtb_sspd_wp_rt" class="java.lang.String"/>
+	<field name="bphtb_sspd_wp_rw" class="java.lang.String"/>
+	<field name="bphtb_sspd_wp_kecamatan" class="java.lang.String"/>
+	<field name="bphtb_sspd_wp_kota" class="java.lang.String"/>
+	<field name="bphtb_sspd_wp_provinsi" class="java.lang.String"/>
+	<field name="bphtb_sspd_wp_identitas" class="java.lang.String"/>
+	<field name="bphtb_sspd_wp_identitaskd" class="java.lang.String"/>
+	<field name="bphtb_sspd_tgl_transaksi" class="java.sql.Date"/>
+	<field name="bphtb_sspd_kd_propinsi" class="java.lang.String"/>
+	<field name="bphtb_sspd_kd_dati2" class="java.lang.String"/>
+	<field name="bphtb_sspd_kd_kecamatan" class="java.lang.String"/>
+	<field name="bphtb_sspd_kd_kelurahan" class="java.lang.String"/>
+	<field name="bphtb_sspd_kd_blok" class="java.lang.String"/>
+	<field name="bphtb_sspd_no_urut" class="java.lang.String"/>
+	<field name="bphtb_sspd_kd_jns_op" class="java.lang.String"/>
+	<field name="bphtb_sspd_thn_pajak_sppt" class="java.lang.String"/>
+	<field name="bphtb_sspd_op_alamat" class="java.lang.String"/>
+	<field name="bphtb_sspd_op_blok_kav" class="java.lang.String"/>
+	<field name="bphtb_sspd_op_rt" class="java.lang.String"/>
+	<field name="bphtb_sspd_op_rw" class="java.lang.String"/>
+	<field name="bphtb_sspd_bumi_luas" class="java.lang.Long"/>
+	<field name="bphtb_sspd_bumi_njop" class="java.lang.Long"/>
+	<field name="bphtb_sspd_bng_luas" class="java.lang.Long"/>
+	<field name="bphtb_sspd_bng_njop" class="java.lang.Long"/>
+	<field name="bphtb_sspd_no_sertifikat" class="java.lang.String"/>
+	<field name="bphtb_sspd_njop" class="java.lang.Long"/>
+	<field name="bphtb_sspd_perolehan_id" class="java.lang.Integer"/>
+	<field name="bphtb_sspd_npop" class="java.lang.Long"/>
+	<field name="bphtb_sspd_npoptkp" class="java.lang.Long"/>
+	<field name="bphtb_sspd_tarif" class="java.lang.Double"/>
+	<field name="bphtb_sspd_terhutang" class="java.lang.Long"/>
+	<field name="bphtb_sspd_bagian" class="java.lang.Integer"/>
+	<field name="bphtb_sspd_pembagi" class="java.lang.Integer"/>
+	<field name="bphtb_sspd_tarif_pengurang" class="java.lang.Integer"/>
+	<field name="bphtb_sspd_pengurang" class="java.lang.Long"/>
+	<field name="bphtb_sspd_bphtb_sudah_dibayarkan" class="java.lang.Long"/>
+	<field name="bphtb_sspd_denda" class="java.lang.Long"/>
+	<field name="bphtb_sspd_restitusi" class="java.lang.Long"/>
+	<field name="bphtb_sspd_bphtb_harus_dibayarkan" class="java.lang.Long"/>
+	<field name="bphtb_sspd_status_pembayaran" class="java.lang.Integer"/>
+	<field name="bphtb_sspd_dasar_id" class="java.lang.Integer"/>
+	<field name="bphtb_sspd_create_uid" class="java.lang.String"/>
+	<field name="bphtb_sspd_update_uid" class="java.lang.String"/>
+	<field name="bphtb_sspd_created" class="java.sql.Timestamp"/>
+	<field name="bphtb_sspd_updated" class="java.sql.Timestamp"/>
+	<field name="bphtb_sspd_header_id" class="java.lang.Long"/>
+	<field name="ref_dati2_nm_dati2" class="java.lang.String"/>
+	<field name="ref_kecamatan_nm_kecamatan" class="java.lang.String"/>
+	<field name="ref_kelurahan_nm_kelurahan" class="java.lang.String"/>
+	<field name="ref_kelurahan_kd_pos_kelurahan" class="java.lang.String"/>
+	<field name="bphtb_perolehan_nama" class="java.lang.String"/>
+	<field name="bphtb_ppat_nama" class="java.lang.String"/>
+	<field name="ref_propinsi_nm_propinsi" class="java.lang.String"/>
+	<field name="bphtb_dasar_nama" class="java.lang.String"/>
+	<variable name="sum_bphtb" class="java.lang.Double" resetType="Group" resetGroup="PPAT" calculation="Sum">
+		<variableExpression><![CDATA[$F{bphtb_sspd_bphtb_harus_dibayarkan}]]></variableExpression>
+	</variable>
+	<variable name="luas_bumi" class="java.lang.Double" resetType="Group" resetGroup="PPAT" calculation="Sum">
+		<variableExpression><![CDATA[$F{bphtb_sspd_bumi_luas}]]></variableExpression>
+	</variable>
+	<variable name="njop_bumi" class="java.lang.Double" resetType="Group" resetGroup="PPAT" calculation="Sum">
+		<variableExpression><![CDATA[$F{bumi}]]></variableExpression>
+	</variable>
+	<variable name="luas_bng" class="java.lang.Double" resetType="Group" resetGroup="PPAT" calculation="Sum">
+		<variableExpression><![CDATA[$F{bphtb_sspd_bng_luas}]]></variableExpression>
+	</variable>
+	<variable name="njop_bng" class="java.lang.Double" resetType="Group" resetGroup="PPAT" calculation="Sum">
+		<variableExpression><![CDATA[$F{bangunan}]]></variableExpression>
+	</variable>
+	<group name="PPAT" keepTogether="true">
+		<groupExpression><![CDATA[$F{bphtb_ppat_nama}]]></groupExpression>
+		<groupHeader>
+			<band height="23">
+				<staticText>
+					<reportElement x="6" y="0" width="65" height="13"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Arial" size="9" isBold="true"/>
+					</textElement>
+					<text><![CDATA[NAMA PPAT :]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="71" y="0" width="832" height="13"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Arial" size="9" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{bphtb_ppat_nama}]]></textFieldExpression>
+				</textField>
+			</band>
+			<band height="27">
+				<staticText>
+					<reportElement x="30" y="0" width="51" height="27"/>
+					<box>
+						<topPen lineWidth="0.25"/>
+						<leftPen lineWidth="0.25"/>
+						<bottomPen lineWidth="0.25"/>
+						<rightPen lineWidth="0.25"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Arial" size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[TANGGAL]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="81" y="0" width="55" height="27"/>
+					<box>
+						<topPen lineWidth="0.25"/>
+						<leftPen lineWidth="0.25"/>
+						<bottomPen lineWidth="0.25"/>
+						<rightPen lineWidth="0.25"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Arial" size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[NOMOR
+SSPD]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="136" y="0" width="91" height="27"/>
+					<box>
+						<topPen lineWidth="0.25"/>
+						<leftPen lineWidth="0.25"/>
+						<bottomPen lineWidth="0.25"/>
+						<rightPen lineWidth="0.25"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Arial" size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[NOP]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="227" y="0" width="78" height="27"/>
+					<box>
+						<topPen lineWidth="0.25"/>
+						<leftPen lineWidth="0.25"/>
+						<bottomPen lineWidth="0.25"/>
+						<rightPen lineWidth="0.25"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Arial" size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[NAMA WP]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="305" y="0" width="117" height="27"/>
+					<box>
+						<topPen lineWidth="0.25"/>
+						<leftPen lineWidth="0.25"/>
+						<bottomPen lineWidth="0.25"/>
+						<rightPen lineWidth="0.25"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Arial" size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[LOKASI OP]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="422" y="0" width="196" height="13"/>
+					<box>
+						<topPen lineWidth="0.25"/>
+						<leftPen lineWidth="0.25"/>
+						<bottomPen lineWidth="0.25"/>
+						<rightPen lineWidth="0.25"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Arial" size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[BUMI]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="422" y="13" width="52" height="14"/>
+					<box>
+						<topPen lineWidth="0.25"/>
+						<leftPen lineWidth="0.25"/>
+						<bottomPen lineWidth="0.25"/>
+						<rightPen lineWidth="0.25"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Arial" size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[LUAS (M2)]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="474" y="13" width="65" height="14"/>
+					<box>
+						<topPen lineWidth="0.25"/>
+						<leftPen lineWidth="0.25"/>
+						<bottomPen lineWidth="0.25"/>
+						<rightPen lineWidth="0.25"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Arial" size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[NJOP (RP)]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="618" y="0" width="182" height="13"/>
+					<box>
+						<topPen lineWidth="0.25"/>
+						<leftPen lineWidth="0.25"/>
+						<bottomPen lineWidth="0.25"/>
+						<rightPen lineWidth="0.25"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Arial" size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[BANGUNAN]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="618" y="13" width="51" height="14"/>
+					<box>
+						<topPen lineWidth="0.25"/>
+						<leftPen lineWidth="0.25"/>
+						<bottomPen lineWidth="0.25"/>
+						<rightPen lineWidth="0.25"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Arial" size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[LUAS (M2)]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="669" y="13" width="65" height="14"/>
+					<box>
+						<topPen lineWidth="0.25"/>
+						<leftPen lineWidth="0.25"/>
+						<bottomPen lineWidth="0.25"/>
+						<rightPen lineWidth="0.25"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Arial" size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[NJOP (RP)]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="838" y="0" width="64" height="27"/>
+					<box>
+						<topPen lineWidth="0.25"/>
+						<leftPen lineWidth="0.25"/>
+						<bottomPen lineWidth="0.25"/>
+						<rightPen lineWidth="0.25"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Arial" size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[BPHTB
+(RP)]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="800" y="0" width="38" height="27"/>
+					<box>
+						<topPen lineWidth="0.25"/>
+						<leftPen lineWidth="0.25"/>
+						<bottomPen lineWidth="0.25"/>
+						<rightPen lineWidth="0.25"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Arial" size="7" isBold="true"/>
+					</textElement>
+					<text><![CDATA[STATUS]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="734" y="13" width="66" height="14"/>
+					<box>
+						<topPen lineWidth="0.25"/>
+						<leftPen lineWidth="0.25"/>
+						<bottomPen lineWidth="0.25"/>
+						<rightPen lineWidth="0.25"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Arial" size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[JUMLAH (RP)]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="539" y="13" width="79" height="14"/>
+					<box>
+						<topPen lineWidth="0.25"/>
+						<leftPen lineWidth="0.25"/>
+						<bottomPen lineWidth="0.25"/>
+						<rightPen lineWidth="0.25"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Arial" size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[JUMLAH (RP)]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="0" y="0" width="30" height="27"/>
+					<box>
+						<topPen lineWidth="0.25"/>
+						<leftPen lineWidth="0.25"/>
+						<bottomPen lineWidth="0.25"/>
+						<rightPen lineWidth="0.25"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Arial" size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[NO]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="30">
+				<staticText>
+					<reportElement x="0" y="0" width="422" height="13"/>
+					<box rightPadding="3">
+						<topPen lineWidth="0.25"/>
+						<leftPen lineWidth="0.25"/>
+						<bottomPen lineWidth="0.25"/>
+						<rightPen lineWidth="0.25"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Arial" size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[JUMLAH]]></text>
+				</staticText>
+				<textField pattern="#,##0.00;(#,##0.00)" isBlankWhenNull="true">
+					<reportElement x="838" y="0" width="64" height="13"/>
+					<box>
+						<topPen lineWidth="0.25"/>
+						<leftPen lineWidth="0.25"/>
+						<bottomPen lineWidth="0.25"/>
+						<rightPen lineWidth="0.25"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Arial" size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[NumberFormat.getInstance().getNumberInstance(Locale.ITALIAN).format($V{sum_bphtb})]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" pattern="#,##0.00;(#,##0.00)" isBlankWhenNull="true">
+					<reportElement x="422" y="0" width="52" height="13"/>
+					<box>
+						<topPen lineWidth="0.25"/>
+						<leftPen lineWidth="0.25"/>
+						<bottomPen lineWidth="0.25"/>
+						<rightPen lineWidth="0.25"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Arial" size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[NumberFormat.getInstance().getNumberInstance(Locale.ITALIAN).format($V{luas_bumi})]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00;(#,##0.00)" isBlankWhenNull="true">
+					<reportElement x="618" y="0" width="51" height="13"/>
+					<box>
+						<topPen lineWidth="0.25"/>
+						<leftPen lineWidth="0.25"/>
+						<bottomPen lineWidth="0.25"/>
+						<rightPen lineWidth="0.25"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Arial" size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[NumberFormat.getInstance().getNumberInstance(Locale.ITALIAN).format($V{luas_bng})]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00;(#,##0.00)" isBlankWhenNull="true">
+					<reportElement x="734" y="0" width="66" height="13"/>
+					<box>
+						<topPen lineWidth="0.25"/>
+						<leftPen lineWidth="0.25"/>
+						<bottomPen lineWidth="0.25"/>
+						<rightPen lineWidth="0.25"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Arial" size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[NumberFormat.getInstance().getNumberInstance(Locale.ITALIAN).format($V{njop_bng})]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.00;(#,##0.00)" isBlankWhenNull="true">
+					<reportElement x="539" y="0" width="79" height="13"/>
+					<box>
+						<topPen lineWidth="0.25"/>
+						<leftPen lineWidth="0.25"/>
+						<bottomPen lineWidth="0.25"/>
+						<rightPen lineWidth="0.25"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Arial" size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[NumberFormat.getInstance().getNumberInstance(Locale.ITALIAN).format($V{njop_bumi})]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" pattern="#,##0.00;(#,##0.00)" isBlankWhenNull="true">
+					<reportElement x="474" y="0" width="65" height="13"/>
+					<box>
+						<topPen lineWidth="0.25"/>
+						<leftPen lineWidth="0.25"/>
+						<bottomPen lineWidth="0.25"/>
+						<rightPen lineWidth="0.25"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Arial" size="8" isBold="true"/>
+					</textElement>
+				</textField>
+				<textField isStretchWithOverflow="true" pattern="#,##0.00;(#,##0.00)" isBlankWhenNull="true">
+					<reportElement x="669" y="0" width="65" height="13"/>
+					<box>
+						<topPen lineWidth="0.25"/>
+						<leftPen lineWidth="0.25"/>
+						<bottomPen lineWidth="0.25"/>
+						<rightPen lineWidth="0.25"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Arial" size="8" isBold="true"/>
+					</textElement>
+				</textField>
+				<textField isStretchWithOverflow="true" pattern="#,##0.00;(#,##0.00)" isBlankWhenNull="true">
+					<reportElement x="800" y="0" width="38" height="13"/>
+					<box>
+						<topPen lineWidth="0.25"/>
+						<leftPen lineWidth="0.25"/>
+						<bottomPen lineWidth="0.25"/>
+						<rightPen lineWidth="0.25"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Arial" size="8" isBold="true"/>
+					</textElement>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<title>
+		<band height="65">
+			<textField>
+				<reportElement x="6" y="0" width="910" height="33"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="Arial" size="13" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{daerah}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="6" y="16" width="910" height="17"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="Arial" size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[REGISTER SSPD]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="6" y="33" width="910" height="17"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="13" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["TAHUN "+$F{bphtb_sspd_tahun}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<detail>
+		<band height="13">
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToBandHeight" x="81" y="0" width="55" height="13"/>
+				<box>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement verticalAlignment="Top">
+					<font fontName="Arial" size="7"/>
+					<paragraph leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{bphtb_sspd_kode}.length()==1 ? $F{bphtb_sspd_tahun} + ".0" + $F{bphtb_sspd_kode} + "." + $F{bphtb_sspd_no_sspd} : $F{bphtb_sspd_tahun} + "." + $F{bphtb_sspd_kode} + "." + $F{bphtb_sspd_no_sspd}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToBandHeight" x="136" y="0" width="92" height="13"/>
+				<box>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="Arial" size="7"/>
+					<paragraph leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{bphtb_sspd_kd_propinsi} + "." + $F{bphtb_sspd_kd_dati2} + "." + $F{bphtb_sspd_kd_kecamatan} + "." + $F{bphtb_sspd_kd_kelurahan} + "." + $F{bphtb_sspd_kd_blok} + "." + $F{bphtb_sspd_no_urut} + "." + $F{bphtb_sspd_kd_jns_op}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToBandHeight" x="228" y="0" width="77" height="13"/>
+				<box>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement verticalAlignment="Top">
+					<font fontName="Arial" size="7"/>
+					<paragraph leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{bphtb_sspd_wp_nama}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToBandHeight" x="305" y="0" width="117" height="13"/>
+				<box>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement verticalAlignment="Top">
+					<font fontName="Arial" size="7"/>
+					<paragraph leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{bphtb_sspd_op_alamat}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0.00;(#,##0.00)" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="422" y="0" width="52" height="13"/>
+				<box>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Top">
+					<font fontName="Arial" size="7"/>
+					<paragraph leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[NumberFormat.getInstance().getNumberInstance(Locale.ITALIAN).format($F{bphtb_sspd_bumi_luas})]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0.00;(#,##0.00)" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="474" y="0" width="65" height="13"/>
+				<box>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Top">
+					<font fontName="Arial" size="7"/>
+					<paragraph leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[NumberFormat.getInstance().getNumberInstance(Locale.ITALIAN).format($F{bphtb_sspd_bumi_njop})]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0.00;(#,##0.00)" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="618" y="0" width="51" height="13"/>
+				<box>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Top">
+					<font fontName="Arial" size="7"/>
+					<paragraph leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[NumberFormat.getInstance().getNumberInstance(Locale.ITALIAN).format($F{bphtb_sspd_bng_luas})]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0.00;(#,##0.00)" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="669" y="0" width="65" height="13"/>
+				<box>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Top">
+					<font fontName="Arial" size="7"/>
+					<paragraph leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[NumberFormat.getInstance().getNumberInstance(Locale.ITALIAN).format($F{bphtb_sspd_bng_njop})]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0.00;(#,##0.00)">
+				<reportElement stretchType="RelativeToBandHeight" x="838" y="0" width="64" height="13"/>
+				<box>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Top">
+					<font fontName="Arial" size="7"/>
+					<paragraph leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[NumberFormat.getInstance().getNumberInstance(Locale.ITALIAN).format($F{bphtb_sspd_bphtb_harus_dibayarkan})]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="800" y="0" width="38" height="13"/>
+				<box>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="Arial" size="7"/>
+					<paragraph leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{bphtb_sspd_status_pembayaran}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0.00;(#,##0.00)" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="539" y="0" width="79" height="13"/>
+				<box>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Top">
+					<font fontName="Arial" size="7"/>
+					<paragraph leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[NumberFormat.getInstance().getNumberInstance(Locale.ITALIAN).format($F{bumi})]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="#,##0.00;(#,##0.00)" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="734" y="0" width="66" height="13"/>
+				<box>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Right" verticalAlignment="Top">
+					<font fontName="Arial" size="7"/>
+					<paragraph leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[NumberFormat.getInstance().getNumberInstance(Locale.ITALIAN).format($F{bangunan})]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="30" height="13"/>
+				<box>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="Arial" size="7"/>
+					<paragraph leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{no_urut}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="dd-MMM-yyyy">
+				<reportElement stretchType="RelativeToBandHeight" x="30" y="0" width="51" height="13"/>
+				<box>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="Arial" size="7"/>
+					<paragraph leftIndent="2" rightIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{bphtb_sspd_tgl_transaksi}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="20">
+			<textField>
+				<reportElement x="834" y="6" width="23" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="858" y="6" width="21" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[Dari]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="751" y="6" width="83" height="13"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<text><![CDATA[Halaman ]]></text>
+			</staticText>
+			<textField evaluationTime="Report">
+				<reportElement x="879" y="6" width="22" height="13"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

@@ -1,0 +1,98 @@
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+
+class bill_model extends CI_Model {
+	private $tbl = 'bill';
+	
+	function __construct() {
+		parent::__construct();
+	}
+	
+	function grid()
+	{
+        $sql = "SELECT b.*, op.nama op_nama, wp.nama wp_nama
+            FROM bill b
+            INNER JOIN objek_pajak op ON op.id=b.op_id
+            INNER JOIN wajib_pajak wp ON wp.id=op.wp_id";
+            
+		$this->db->order_by('tgl'); 
+		$query = $this->db->query($sql);
+		if($query->num_rows()!==0)
+		{
+			return $query->result();
+		}
+		else
+			return FALSE;
+	}
+		
+	function grid_item($bill_id)
+	{
+        $sql = "SELECT bi.*, oi.nama op_item_nama
+            FROM bill_item bi
+            INNER JOIN op_item oi ON oi.id=bi.op_item_id
+            WHERE bi.bill_id={$bill_id}";
+            
+		$this->db->order_by('id'); 
+		$query = $this->db->query($sql);
+		if($query->num_rows()!==0)
+		{
+			return $query->result();
+		}
+		else
+			return FALSE;
+	}
+		
+	function get_item($bill_id)
+	{
+		$this->db->where(array('bill_id' => $bill_id)); 
+		$this->db->order_by('nama_produk'); 
+		$query = $this->db->get('bill_item');
+		if($query->num_rows()!==0)
+		{
+			return $query->result();
+		}
+		else
+			return FALSE;
+	}
+    
+	function get_all()
+	{
+		$this->db->order_by('id'); 
+		$query = $this->db->get($this->tbl);
+		if($query->num_rows()!==0)
+		{
+			return $query->result();
+		}
+		else
+			return FALSE;
+	}
+		
+	function get($id)
+	{
+		$this->db->where('id',$id);
+		$query = $this->db->get($this->tbl);
+		if($query->num_rows()!==0)
+		{
+			return $query->row();
+		}
+		else
+			return FALSE;
+	}
+	
+	//-- admin
+	function save($data) {
+		$this->db->insert($this->tbl,$data);
+		return $this->db->insert_id();
+	}
+	
+	function update($id, $data) {
+		$this->db->where('id', $id);
+		$this->db->update($this->tbl,$data);
+	}
+	
+	function delete($id) {
+		$this->db->where('id', $id);
+		$this->db->delete($this->tbl);
+	}
+}
+
+/* End of file _model.php */

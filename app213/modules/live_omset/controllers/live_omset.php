@@ -1,0 +1,90 @@
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+
+class live_omset extends CI_Controller {
+
+	function __construct()
+	{
+		parent::__construct();
+		if(active_module()!='live_omset') { 
+            redirect('logout');
+		}
+
+        $this->load->model('login_model');
+        if ($grp = $this->login_model->check_user_app()) {            
+            $this->session->set_userdata('groupid'  , $grp->group_id);
+            $this->session->set_userdata('groupkd'  , $grp->group_kode);
+            $this->session->set_userdata('groupname', $grp->group_nama);
+        }
+        
+		$this->load->model(array('apps_model', 'omset_model'));
+	}
+	
+	public function index()
+	{
+		$data['current'] = 'beranda';
+		$data['apps']    = $this->apps_model->get_active_only();
+		$this->load->view('vmain', $data);
+	}
+    
+    public function get_realisasi() {
+        $data = $this->omset_model->get_realisasi();
+        
+        $ret = array();
+        $ret['monthly'] = "Rp. ".number_format($data->monthly, 0, ',', '.');
+        $ret['yearly'] = "Rp. ".number_format($data->yearly, 0, ',', '.');
+        echo json_encode($ret);
+    }
+    
+    public function get_realisasi_op() {
+        $data = $this->omset_model->get_realisasi_op();
+        
+        $ret = array();
+        foreach ($data as $row) {
+            $ret['categories'][] = $row->op_nama;
+            $ret['series_last_month'][] = (float) $row->last_month;
+            $ret['series_this_month'][] = (float) $row->this_month;
+        }
+        echo json_encode($ret);
+    }
+    
+    public function grid_realisasi_op() {
+		$i=0;
+        $responce = new stdClass;
+		if($query = $this->omset_model->get_realisasi_op()) {
+			foreach($query as $row) {
+				$responce->aaData[$i][]='<a onClick="javascript:get_realisasi_wp(\''.$row->op_nama.'\');" href="#"><strong>'.$row->op_nama.'</strong></a>';
+				$responce->aaData[$i][]=number_format($row->last_month, 0, ',', '.');
+				$responce->aaData[$i][]=number_format($row->this_month, 0, ',', '.');
+				$i++;
+			}
+		} else {
+			$responce->sEcho=1;
+			$responce->iTotalRecords="0";
+			$responce->iTotalDisplayRecords="0";
+			$responce->aaData=array();
+		}
+		echo json_encode($responce);
+    }
+    
+    public function grid_realisasi_wp() {
+        $op = $this->uri->segment(3);
+        
+		$i=0;
+        $responce = new stdClass;
+		if($query = $this->omset_model->get_realisasi_wp($op)) {
+			foreach($query as $row) {
+				// $responce->aaData[$i][]='<a id="op" href="#"><strong>'.$row->wp_nama.'</strong></a>';
+				$responce->aaData[$i][]='<strong>'.$row->wp_nama.'</strong>';
+				$responce->aaData[$i][]=number_format($row->last_month, 0, ',', '.');
+				$responce->aaData[$i][]=number_format($row->this_month, 0, ',', '.');
+				$i++;
+			}
+		} else {
+			$responce->sEcho=1;
+			$responce->iTotalRecords="0";
+			$responce->iTotalDisplayRecords="0";
+			$responce->aaData=array();
+		}
+		echo json_encode($responce);
+    }
+}

@@ -1,0 +1,180 @@
+<?php
+if (!defined('BASEPATH'))
+    exit('No direct script access allowed');
+
+class gateway extends CI_Controller
+{
+    private $contoller;
+    private $view;
+    private $view_form;
+
+    function __construct()
+    {
+        parent::__construct();
+        if (!is_login()) {
+            echo "<script>window.location.replace('" . base_url() . "');</script>";
+            exit;
+        }
+        
+        $module = 'im';
+        $this->load->library('module_auth', array(
+            'module' => $module
+        ));
+        
+        $this->load->model(array(
+            'apps_model', 'gateway_model'
+        ));
+        
+        $this->contoller = $this->router->fetch_class();
+        $this->view      = 'v'.$this->contoller;
+        $this->view_form = 'v'.$this->contoller.'_form';
+    }
+    
+    public function index() 
+    {
+        if (!$this->module_auth->read) {
+            $this->session->set_flashdata('msg_warning', $this->module_auth->msg_read);
+            redirect();
+        }
+        
+        $data['current'] = 'im';
+        $data['apps']    = $this->apps_model->get_active_only();
+		
+        $this->load->view($this->view, $data);
+    }
+    
+    function grid()
+    {		
+		$i=0;
+        $responce = new stdClass;
+		if($query = $this->gateway_model->get_all()) {
+			foreach($query as $row) {
+				$responce->aaData[$i][]=$row->id;
+				$responce->aaData[$i][]=$row->nama;
+				$i++;
+			}
+		} else {
+			$responce->sEcho=1;
+			$responce->iTotalRecords="0";
+			$responce->iTotalDisplayRecords="0";
+			$responce->aaData=array();
+		}
+		echo json_encode($responce);
+    }
+    
+    private function fvalidation()
+    {
+        $this->form_validation->set_rules('id','Gateway ID','required|numeric');
+        $this->form_validation->set_rules('nama','Gateway Name','required');
+    }
+    
+    private function fpost()
+    {
+        $data['id'] = $this->input->post('id');
+        $data['nama'] = $this->input->post('nama');
+		
+        return $data;
+    }
+    
+    public function add()
+    {
+        if (!$this->module_auth->create) {
+            $this->session->set_flashdata('msg_warning', $this->module_auth->msg_create);
+            redirect(active_module_url($this->contoller));
+        }
+        
+        $post_data  = $this->fpost();
+        
+        $data['current'] = 'im';
+        $data['apps']    = $this->apps_model->get_active_only();
+        $data['faction'] = active_module_url($this->contoller.'/add');
+        
+        $this->fvalidation();
+        if ($this->form_validation->run() == TRUE) {
+            $input_post = $post_data;
+            $update_data = array(
+                'id' => $input_post['id'],
+                'nama' => empty($input_post['nama']) ? NULL : $input_post['nama'],
+            );
+            $this->gateway_model->save($update_data);
+            
+            $this->session->set_flashdata('msg_success', 'Data telah disimpan');
+            redirect(active_module_url($this->contoller));
+        }
+        
+        $data['dt']      = $post_data;
+        $this->load->view($this->view_form, $data);
+    }
+    
+    public function edit()
+    {
+        if (!$this->module_auth->update) {
+            $this->session->set_flashdata('msg_warning', $this->module_auth->msg_update);
+            redirect(active_module_url($this->contoller));
+        }
+        
+        $p_id = $this->uri->segment(4);
+        
+        $data['current'] = 'im';
+        $data['apps']    = $this->apps_model->get_active_only();
+        $data['faction'] = active_module_url($this->contoller."/update/{$p_id}");
+        
+        if ($p_id && $get = $this->gateway_model->get($p_id)) {
+            $data['dt']['id'] = empty($get->id) ? NULL : $get->id;
+            $data['dt']['nama'] = empty($get->nama) ? NULL : $get->nama;
+			
+			$this->load->view($this->view_form, $data);
+        } else {
+            show_404();
+        }
+    }
+    
+    public function update()
+    {
+        if (!$this->module_auth->update) {
+            $this->session->set_flashdata('msg_warning', $this->module_auth->msg_update);
+            redirect(active_module_url($this->contoller));
+        }
+        
+        $p_id      = $this->uri->segment(4);
+        $post_data = $this->fpost();
+        
+        $data['current'] = 'im';
+        $data['apps']    = $this->apps_model->get_active_only();
+        $data['faction'] = active_module_url($this->contoller."/update/{$p_id}");
+        
+        $this->fvalidation();
+        if ($this->form_validation->run() == TRUE) {
+            $input_post  = $post_data;
+            $update_data = array(
+                'id' => empty($input_post['id']) ? NULL : $input_post['id'],
+                'nama' => empty($input_post['nama']) ? NULL : $input_post['nama'],
+            );
+            
+            $this->gateway_model->update($p_id, $update_data);
+            
+            $this->session->set_flashdata('msg_success', 'Data telah disimpan');
+            redirect(active_module_url($this->contoller));
+        }
+        
+        $data['dt'] = $post_data;		
+		$this->load->view($this->view_form, $data);
+    }
+    
+    public function delete()
+    {
+        if (!$this->module_auth->delete) {
+            $this->session->set_flashdata('msg_warning', $this->module_auth->msg_delete);
+            redirect(active_module_url($this->contoller));
+        }
+        
+        $id = $this->uri->segment(4);
+        if ($id && $this->gateway_model->get($id)) {
+            $this->gateway_model->delete($id);
+            $this->session->set_flashdata('msg_success', 'Data telah dihapus');
+            redirect(active_module_url($this->contoller));
+        } else {
+            show_404();
+        }
+    }
+}
