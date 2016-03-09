@@ -7,15 +7,15 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
 // -- App Info
-define('APP_TITLE'  , 'DPPKAD KOTA TANGERANG SELATAN');
+define('APP_TITLE'  , 'DPPKAD KOTA TASIK MALAYA');
 define('APP_NAME'   , 'pbbbphtb'); //no space please
 define('APP_CORP'   , 'OpenSIPKD');
 define('APP_VERSION', '0.1');
-define('APP_YEAR'   , '2013');
-define('LICENSE_TO' , 'KOTA TANGERANG SELATAN');
+define('APP_YEAR'   , '2016');
+define('LICENSE_TO' , 'KOTA TASIKMALAYA');
 define('LICENSE_TO_SUB' , 'DINAS PENGELOLAAN PENDAPATAN, KEUANGAN DAN ASET DAERAH');
-define('KD_PROPINSI','36');
-define('KD_DATI2','76'); //03 //79
+define('KD_PROPINSI','32');
+define('KD_DATI2','78'); //03 //79
 
  
 // -- Module
@@ -36,16 +36,17 @@ define('MY_MODULES_LOCATIONS' , '../modules/');
 
 // -- Database
 define('DB_TYPE', 'postgre');  //mysql postgre
-define('DB_HOST', '192.168.88.4');
+define('DB_HOST', 'localhost');
 define('DB_PORT', '5432');
-define('DB_USER', 'pbbbphtb');
-define('DB_PASS', '@991004s');
-define('DB_NAME', 'pbbbphtb');
+define('DB_USER', 'tasik');
+define('DB_PASS', 'T4s1k');
+define('DB_NAME', 'bphtb');
 
 // -- Url
 $PROTOCOL = "https://"; //. ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on") ? "s" : "") . "://";
 $SERVER   = isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : $_SERVER['SERVER_NAME'];
 $SERVER   = isset($_SERVER['HTTP_X_FORWARDED_HOST']) ? $_SERVER['HTTP_X_FORWARDED_HOST'] : $SERVER; 
+$BASE_URL = "http://tasik.opensipkd.com"
 $BASE_URL = $PROTOCOL . $SERVER . str_replace(basename($_SERVER['SCRIPT_NAME']),"",$_SERVER['SCRIPT_NAME']);
 define('MY_BASE_URL', $BASE_URL);
 define('MY_INDEX_PAGE', '');

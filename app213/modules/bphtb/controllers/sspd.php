@@ -1039,7 +1039,7 @@ STATUS DAFTAR:
                             bphtb_sspd.kd_jns_op as varchar)) like '%" . $src . "%')) ";
             }
 
-            $order = " order by bphtb_sspd.tgl_transaksi, bphtb_sspd.ppat_id, bphtb_sspd.tahun, bphtb_sspd.kode, bphtb_sspd.no_sspd ";
+            $order = " order by bphtb_sspd.ppat_id, bphtb_sspd.tgl_transaksi, bphtb_sspd.tahun, bphtb_sspd.kode, bphtb_sspd.no_sspd ";
 
             $params = array(
                 "kondisi" => $where,
