@@ -112,7 +112,7 @@
 		<variableExpression><![CDATA[$F{npop}]]></variableExpression>
 	</variable>
 	<group name="ppat" isStartNewPage="true" isReprintHeaderOnEachPage="true">
-		<groupExpression><![CDATA[$F{notaris}]]></groupExpression>
+		<groupExpression><![CDATA[$F{notaris}.toUpperCase().trim()]]></groupExpression>
 		<groupHeader>
 			<band height="35">
 				<staticText>
@@ -427,7 +427,7 @@
 				<textElement textAlignment="Center">
 					<font fontName="Verdana" size="7"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$V{ppat_COUNT}]]></textFieldExpression>
 			</textField>
 			<textField pattern="dd/MM/yyyy">
 				<reportElement stretchType="RelativeToTallestObject" x="19" y="0" width="53" height="11" uuid="88fbd36d-0c9b-43e9-b1d7-c0abb1c186d2"/>
@@ -702,7 +702,7 @@
 				<textElement textAlignment="Center">
 					<font fontName="Verdana" size="7"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$V{ppat_COUNT}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement stretchType="RelativeToTallestObject" x="129" y="0" width="88" height="11" backcolor="#FFFFFF" uuid="9ff57993-b7a0-4fa3-971d-f182774b4de2"/>
