@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="harian" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="30" bottomMargin="20" uuid="efe29627-8ebb-4e94-aac5-1980838cb5c7">
-	<property name="ireport.zoom" value="3.0"/>
+	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="140"/>
+	<property name="ireport.y" value="0"/>
 	<parameter name="startdate" class="java.lang.String">
 		<defaultValueExpression><![CDATA[2013-03-07]]></defaultValueExpression>
 	</parameter>
@@ -111,18 +111,198 @@
 	<variable name="npop_1" class="java.lang.Long" resetType="Group" resetGroup="ppat" calculation="Sum">
 		<variableExpression><![CDATA[$F{npop}]]></variableExpression>
 	</variable>
-	<group name="ppat" isStartNewPage="true">
+	<group name="ppat" isStartNewPage="true" isReprintHeaderOnEachPage="true">
 		<groupExpression><![CDATA[$F{notaris}]]></groupExpression>
 		<groupHeader>
-			<band height="14">
+			<band height="35">
 				<staticText>
-					<reportElement x="0" y="0" width="59" height="14" uuid="d9ae7d43-af40-4134-834f-c2f40a3a533a"/>
+					<reportElement x="0" y="0" width="72" height="14" uuid="d9ae7d43-af40-4134-834f-c2f40a3a533a"/>
+					<textElement>
+						<font isBold="true"/>
+					</textElement>
 					<text><![CDATA[Notaris/PPAT]]></text>
 				</staticText>
 				<textField>
-					<reportElement x="59" y="0" width="100" height="14" uuid="a63e5209-af56-4127-b42a-f0a241878670"/>
+					<reportElement x="86" y="0" width="100" height="14" uuid="a63e5209-af56-4127-b42a-f0a241878670"/>
+					<textElement>
+						<font isBold="true"/>
+					</textElement>
 					<textFieldExpression><![CDATA[$F{notaris}]]></textFieldExpression>
 				</textField>
+				<rectangle>
+					<reportElement stretchType="RelativeToBandHeight" x="0" y="15" width="802" height="20" isPrintWhenDetailOverflows="true" backcolor="#CCCCCC" uuid="502a8cc0-fce9-4554-90ae-4ad114e0ec95"/>
+					<graphicElement>
+						<pen lineWidth="0.0" lineColor="#000000"/>
+					</graphicElement>
+				</rectangle>
+				<staticText>
+					<reportElement x="0" y="14" width="19" height="20" uuid="c9cfafe5-523a-44b7-9a64-405ac2e1d0b8"/>
+					<box rightPadding="0">
+						<pen lineWidth="0.5" lineStyle="Solid"/>
+						<topPen lineWidth="0.5" lineStyle="Solid"/>
+						<leftPen lineWidth="0.5" lineStyle="Solid"/>
+						<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+						<rightPen lineWidth="0.5" lineStyle="Solid"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Verdana" size="7"/>
+					</textElement>
+					<text><![CDATA[NO ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="72" y="14" width="57" height="20" uuid="1be3bdfb-0682-4e2c-9838-f2ccdf36754f"/>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Verdana" size="7"/>
+					</textElement>
+					<text><![CDATA[NO.TRANS]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="217" y="14" width="134" height="20" uuid="95a63743-49b0-496c-8874-40f603370f03"/>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Verdana" size="7"/>
+					</textElement>
+					<text><![CDATA[NAMA WAJIB PAJAK]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="433" y="14" width="75" height="20" uuid="d7d22fb0-5901-4041-87d2-ae9ff73866af"/>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Verdana" size="7"/>
+					</textElement>
+					<text><![CDATA[KECAMATAN]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="351" y="14" width="82" height="20" uuid="6e2784f2-bd16-459a-a662-a5d5a410ee0d"/>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Verdana" size="7"/>
+					</textElement>
+					<text><![CDATA[KELURAHAN ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="508" y="14" width="58" height="20" uuid="6a77681b-c015-4efb-acab-6905b6806869"/>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Verdana" size="7"/>
+					</textElement>
+					<text><![CDATA[LUAS TANAH]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="566" y="14" width="52" height="20" uuid="bae6b95d-d303-421f-a97f-18f82893f04d"/>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Verdana" size="7"/>
+					</textElement>
+					<text><![CDATA[LUAS BNGN ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="618" y="14" width="76" height="20" uuid="b38fb9e5-ce1c-47a3-ac4f-7385fe1163f0"/>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Verdana" size="7"/>
+					</textElement>
+					<text><![CDATA[N J O P]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="129" y="14" width="88" height="20" uuid="d3cff7e6-baf8-4e33-8d86-180393d00e55"/>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Verdana" size="7"/>
+					</textElement>
+					<text><![CDATA[NOP ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="694" y="14" width="84" height="20" uuid="7970bafa-7e2f-455e-9a00-cf3b2e96461d"/>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Verdana" size="7"/>
+					</textElement>
+					<text><![CDATA[BPHTB YG DIBAYAR]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="778" y="14" width="24" height="20" uuid="360354be-eca9-41c5-b44d-3c2e14e38bdd"/>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Verdana" size="7"/>
+					</textElement>
+					<text><![CDATA[CAB]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="19" y="14" width="53" height="20" uuid="197ca02e-6462-4ea9-9e00-072a6864fcc5"/>
+					<box>
+						<pen lineWidth="0.5"/>
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Verdana" size="7"/>
+					</textElement>
+					<text><![CDATA[TGL]]></text>
+				</staticText>
 			</band>
 		</groupHeader>
 		<groupFooter>
@@ -230,182 +410,7 @@
 		</band>
 	</title>
 	<pageHeader>
-		<band height="21" splitType="Stretch">
-			<rectangle>
-				<reportElement stretchType="RelativeToBandHeight" x="0" y="1" width="802" height="20" isPrintWhenDetailOverflows="true" backcolor="#CCCCCC" uuid="502a8cc0-fce9-4554-90ae-4ad114e0ec95"/>
-				<graphicElement>
-					<pen lineWidth="0.0" lineColor="#000000"/>
-				</graphicElement>
-			</rectangle>
-			<staticText>
-				<reportElement x="0" y="0" width="19" height="20" uuid="c9cfafe5-523a-44b7-9a64-405ac2e1d0b8"/>
-				<box rightPadding="0">
-					<pen lineWidth="0.5" lineStyle="Solid"/>
-					<topPen lineWidth="0.5" lineStyle="Solid"/>
-					<leftPen lineWidth="0.5" lineStyle="Solid"/>
-					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
-					<rightPen lineWidth="0.5" lineStyle="Solid"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Verdana" size="7"/>
-				</textElement>
-				<text><![CDATA[NO ]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="72" y="0" width="57" height="20" uuid="1be3bdfb-0682-4e2c-9838-f2ccdf36754f"/>
-				<box>
-					<pen lineWidth="0.5"/>
-					<topPen lineWidth="0.5"/>
-					<leftPen lineWidth="0.5"/>
-					<bottomPen lineWidth="0.5"/>
-					<rightPen lineWidth="0.5"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Verdana" size="7"/>
-				</textElement>
-				<text><![CDATA[NO.TRANS]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="217" y="0" width="134" height="20" uuid="95a63743-49b0-496c-8874-40f603370f03"/>
-				<box>
-					<pen lineWidth="0.5"/>
-					<topPen lineWidth="0.5"/>
-					<leftPen lineWidth="0.5"/>
-					<bottomPen lineWidth="0.5"/>
-					<rightPen lineWidth="0.5"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Verdana" size="7"/>
-				</textElement>
-				<text><![CDATA[NAMA WAJIB PAJAK]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="433" y="0" width="75" height="20" uuid="d7d22fb0-5901-4041-87d2-ae9ff73866af"/>
-				<box>
-					<pen lineWidth="0.5"/>
-					<topPen lineWidth="0.5"/>
-					<leftPen lineWidth="0.5"/>
-					<bottomPen lineWidth="0.5"/>
-					<rightPen lineWidth="0.5"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Verdana" size="7"/>
-				</textElement>
-				<text><![CDATA[KECAMATAN]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="351" y="0" width="82" height="20" uuid="6e2784f2-bd16-459a-a662-a5d5a410ee0d"/>
-				<box>
-					<pen lineWidth="0.5"/>
-					<topPen lineWidth="0.5"/>
-					<leftPen lineWidth="0.5"/>
-					<bottomPen lineWidth="0.5"/>
-					<rightPen lineWidth="0.5"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Verdana" size="7"/>
-				</textElement>
-				<text><![CDATA[KELURAHAN ]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="508" y="0" width="58" height="20" uuid="6a77681b-c015-4efb-acab-6905b6806869"/>
-				<box>
-					<pen lineWidth="0.5"/>
-					<topPen lineWidth="0.5"/>
-					<leftPen lineWidth="0.5"/>
-					<bottomPen lineWidth="0.5"/>
-					<rightPen lineWidth="0.5"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Verdana" size="7"/>
-				</textElement>
-				<text><![CDATA[LUAS TANAH]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="566" y="0" width="52" height="20" uuid="bae6b95d-d303-421f-a97f-18f82893f04d"/>
-				<box>
-					<pen lineWidth="0.5"/>
-					<topPen lineWidth="0.5"/>
-					<leftPen lineWidth="0.5"/>
-					<bottomPen lineWidth="0.5"/>
-					<rightPen lineWidth="0.5"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Verdana" size="7"/>
-				</textElement>
-				<text><![CDATA[LUAS BNGN ]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="618" y="0" width="76" height="20" uuid="b38fb9e5-ce1c-47a3-ac4f-7385fe1163f0"/>
-				<box>
-					<pen lineWidth="0.5"/>
-					<topPen lineWidth="0.5"/>
-					<leftPen lineWidth="0.5"/>
-					<bottomPen lineWidth="0.5"/>
-					<rightPen lineWidth="0.5"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Verdana" size="7"/>
-				</textElement>
-				<text><![CDATA[N J O P]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="129" y="0" width="88" height="20" uuid="d3cff7e6-baf8-4e33-8d86-180393d00e55"/>
-				<box>
-					<pen lineWidth="0.5"/>
-					<topPen lineWidth="0.5"/>
-					<leftPen lineWidth="0.5"/>
-					<bottomPen lineWidth="0.5"/>
-					<rightPen lineWidth="0.5"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Verdana" size="7"/>
-				</textElement>
-				<text><![CDATA[NOP ]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="694" y="0" width="84" height="20" uuid="7970bafa-7e2f-455e-9a00-cf3b2e96461d"/>
-				<box>
-					<pen lineWidth="0.5"/>
-					<topPen lineWidth="0.5"/>
-					<leftPen lineWidth="0.5"/>
-					<bottomPen lineWidth="0.5"/>
-					<rightPen lineWidth="0.5"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Verdana" size="7"/>
-				</textElement>
-				<text><![CDATA[BPHTB YG DIBAYAR]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="778" y="0" width="24" height="20" uuid="360354be-eca9-41c5-b44d-3c2e14e38bdd"/>
-				<box>
-					<pen lineWidth="0.5"/>
-					<topPen lineWidth="0.5"/>
-					<leftPen lineWidth="0.5"/>
-					<bottomPen lineWidth="0.5"/>
-					<rightPen lineWidth="0.5"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Verdana" size="7"/>
-				</textElement>
-				<text><![CDATA[CAB]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="19" y="0" width="53" height="20" uuid="197ca02e-6462-4ea9-9e00-072a6864fcc5"/>
-				<box>
-					<pen lineWidth="0.5"/>
-					<topPen lineWidth="0.5"/>
-					<leftPen lineWidth="0.5"/>
-					<bottomPen lineWidth="0.5"/>
-					<rightPen lineWidth="0.5"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Verdana" size="7"/>
-				</textElement>
-				<text><![CDATA[TGL]]></text>
-			</staticText>
-		</band>
+		<band height="21" splitType="Stretch"/>
 	</pageHeader>
 	<detail>
 		<band height="11">
