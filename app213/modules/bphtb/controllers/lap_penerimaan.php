@@ -44,6 +44,24 @@ class lap_penerimaan extends CI_Controller
 		
         $this->load->view('vlap_penerimaan', $data);
     }
+    function harian_not() {
+        if (!$this->module_auth->read) {
+            $this->session->set_flashdata('msg_warning', $this->module_auth->msg_read);
+            redirect(active_module_url(''));
+        }
+        
+        $data['apps']      = $this->apps_model->get_active_only();
+		$data['current']   = 'penerimaan';
+        $data['judul_lap'] = 'Register Penerimaan Per Notaris';
+        $data['rpt']       = "hariannot";
+		
+		$tglawal  = date('d-m-Y', strtotime('2013-01-01'));
+		$tglakhir = date('d-m-Y');
+        $data['tglawal']  = $tglawal;
+        $data['tglakhir'] = $tglakhir;
+		
+        $this->load->view('vlap_penerimaan', $data);
+    }
     
     function harian_kel() {
         if (!$this->module_auth->read) {

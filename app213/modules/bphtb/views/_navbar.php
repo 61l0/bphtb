@@ -64,7 +64,8 @@
                         <ul class="dropdown-menu">
                             <li><a href="<?=active_module_url();?>penerimaan">Daftar Penerimaan</a></li>
                             <li class="nav-header">Laporan</li>
-                            <li><a href="<?=active_module_url('lap_penerimaan/harian');?>">Register Pembayaran Harian</a></li>
+                            <li><a href="<?=active_module_url('lap_penerimaan/harian');?>">Register Penerimaan</a></li>
+                            <li><a href="<?=active_module_url('lap_penerimaan/harian_not');?>">Register Penerimaan per Notaris</a></li>
                             <li><a href="<?=active_module_url('lap_penerimaan/harian_kel');?>">Rekapitulasi Per Kelurahan</a></li>
                             <li><a href="<?=active_module_url('lap_penerimaan/harian_kec');?>">Rekapitulasi Per Kecamatan</a></li>
                             <li><a href="<?=active_module_url('lap_penerimaan/harian_kab');?>">Rekapitulasi Per Kabupaten</a></li>
