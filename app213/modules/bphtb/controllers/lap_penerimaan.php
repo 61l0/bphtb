@@ -37,7 +37,7 @@ class lap_penerimaan extends CI_Controller
         $data['judul_lap'] = 'Laporan Penerimaan : Harian';
         $data['rpt']       = "harian";
 		
-		$tglawal  = date('d-m-Y', strtotime('2013-01-01'));
+		$tglawal  = date('d-m-Y', strtotime(date('Y').'-01-01'));
 		$tglakhir = date('d-m-Y');
         $data['tglawal']  = $tglawal;
         $data['tglakhir'] = $tglakhir;
@@ -55,7 +55,7 @@ class lap_penerimaan extends CI_Controller
         $data['judul_lap'] = 'Register Penerimaan Per Notaris';
         $data['rpt']       = "hariannot";
 		
-		$tglawal  = date('d-m-Y', strtotime('2013-01-01'));
+		$tglawal  = date('d-m-Y', strtotime(date('Y').'-01-01'));
 		$tglakhir = date('d-m-Y');
         $data['tglawal']  = $tglawal;
         $data['tglakhir'] = $tglakhir;
@@ -74,7 +74,7 @@ class lap_penerimaan extends CI_Controller
         $data['judul_lap'] = 'Laporan Penerimaan : Harian Per Kelurahan';
         $data['rpt']       = "hariankel";
 		
-		$tglawal  = date('d-m-Y', strtotime('2013-01-01'));
+		$tglawal  = date('d-m-Y', strtotime(date('Y').'-01-01'));
 		$tglakhir = date('d-m-Y');
         $data['tglawal']  = $tglawal;
         $data['tglakhir'] = $tglakhir;
@@ -93,7 +93,7 @@ class lap_penerimaan extends CI_Controller
         $data['judul_lap'] = 'Laporan Penerimaan : Harian Per Kecamatan';
         $data['rpt']       = "hariankec";
 		
-		$tglawal  = date('d-m-Y', strtotime('2013-01-01'));
+		$tglawal  = date('d-m-Y', strtotime(date('Y').'-01-01'));
 		$tglakhir = date('d-m-Y');
         $data['tglawal']  = $tglawal;
         $data['tglakhir'] = $tglakhir;
@@ -112,7 +112,7 @@ class lap_penerimaan extends CI_Controller
         $data['judul_lap'] = 'Laporan Penerimaan : Harian Per Kabupaten';
         $data['rpt']       = "hariankab";
 		
-		$tglawal  = date('d-m-Y', strtotime('2013-01-01'));
+		$tglawal  = date('d-m-Y', strtotime(date('Y').'-01-01'));
 		$tglakhir = date('d-m-Y');
         $data['tglawal']  = $tglawal;
         $data['tglakhir'] = $tglakhir;
