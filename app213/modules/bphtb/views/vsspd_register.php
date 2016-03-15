@@ -72,6 +72,7 @@ $(document).ready(function() {
     
     var mytoolbar = '<div class="btn-group pull-left">' +
                     '<button id="btn_print" type="button" data-value="printed" class="btn btn-info">Print</button>' +
+                    '<button id="btn_sheet" type="button" data-value="sheet" class="btn btn-info">Sheet</button>' +
                     '</div>'+
                     
                     '<div class="btn-group pull-left">' +
@@ -102,6 +103,17 @@ $(document).ready(function() {
         var rpt = 'bphtb_ppat_register';
         var winparams = 'location=1,status=1,scrollbars=1,resizable=no,width='+screen.width+',height='+screen.height+',menubar=no,toolbar=no,fullscreen=no';
         window.open('<?=active_module_url($this->uri->segment(2));?>show_rpt/?'+rpt + sGo, 'Laporan', winparams);
+    });
+    $('#btn_sheet').click(function() {
+        var srcInput = $('div.dataTables_filter input').val();
+        var sGo = "";
+        sGo = sGo + "/" + $('#tgl1').val();
+        sGo = sGo + "/" + $('#tgl2').val();
+        sGo = sGo + "/" + srcInput;
+
+        var rpt = 'bphtb_ppat_register';
+        var winparams = 'location=1,status=1,scrollbars=1,resizable=no,width='+screen.width+',height='+screen.height+',menubar=no,toolbar=no,fullscreen=no';
+        window.open('<?=active_module_url($this->uri->segment(2));?>show_xls/?'+rpt + sGo+'xls/', 'Laporan', winparams);
     });
 });
 </script>

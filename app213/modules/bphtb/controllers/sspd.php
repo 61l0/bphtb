@@ -1014,7 +1014,66 @@ STATUS DAFTAR:
         ;
         $this->load->view('vjasper_viewer', $data);
     }
+    
+    function show_xls()
+    {
+      $from = date('Y-m-d', strtotime($this->uri->segment(6)));
+      $to   = date('Y-m-d', strtotime($this->uri->segment(7)));
+      $src  = $this->uri->segment(8);
 
+      $where = " where (date(bphtb_sspd.tgl_transaksi) between '{$from}' and '{$to}') ";
+
+      if($this->session->userdata('isppat'))
+          $where .= " and (bphtb_sspd.ppat_id=" . $this->session->userdata('ppat_id') . ") ";
+
+      if ($src!='') {
+          $src = strtolower($src);
+          $where .= " and ((lower(bphtb_ppat.kode) like '%" . $src . "%') or (lower(bphtb_ppat.nama) like '" . $src . "%') or
+                      (lower(bphtb_sspd.wp_nama) like '%" . $src . "%') or
+                      (lower(cast(bphtb_sspd.kd_propinsi || '.' || bphtb_sspd.kd_dati2 || '.' || bphtb_sspd.kd_kecamatan || '.' ||
+                      bphtb_sspd.kd_kelurahan || '.' || bphtb_sspd.kd_blok || '-' || bphtb_sspd.no_urut || '.' ||
+                      bphtb_sspd.kd_jns_op as varchar)) like '%" . $src . "%')) ";
+      }
+
+      $order = " order by ss.ppat_id, ss.tgl_transaksi, ss.tahun, ss.kode, ss.no_sspd ";
+
+      $sql = "SELECT ss.id, row_number() OVER ($order)::text as rownum,
+                get_sspdno(ss.id) as sspdno, ss.tgl_transaksi, ss.wp_nama,
+                ppat.nama as ppatnm, get_nop_sspd(ss.id,true) as nop, ss.thn_pajak_sppt, p.nama as perolehan,
+                d.nama as dasar, ss.npop, ss.bphtb_harus_dibayarkan, ss.tgl_jatuh_tempo,
+                coalesce(ss.status_pembayaran,0) as status_pembayaran,
+                coalesce(ss.status_validasi,0) as status_permohonan 
+             from bphtb_sspd ss 
+             left join bphtb_ppat ppat on ppat.id=ss.ppat_id
+             left join bphtb_perolehan p on p.id=ss.perolehan_id
+             left join bphtb_dasar d on d.id=ss.dasar_id
+             left join bphtb_validasi v on ss.id=v.sspd_id
+             where ss.kd_propinsi = '".KD_PROPINSI."'
+                   and ss.kd_dati2 = '".KD_DATI2."'";
+
+            if($this->session->userdata('isppat'))
+                $sql = $sql  . " and ss.ppat_id=$this->session->userdata('ppat_id')";
+
+            $sql = $sql  . " and date(ss.tgl_transaksi) between '{$from}' and '{$to}'".$order;
+
+      
+      $dt['daerah'] = LICENSE_TO;
+      $dt['ibu_kota'] = LICENSE_TO_SUB;
+      $dt['dinas'] = LICENSE_TO_SUB;
+      $dt['rows'] = $this->db->query($sql).result();
+            
+/*            $params = array(
+                "kondisi" => $where,
+                "order" => $order,
+                "daerah" => LICENSE_TO,
+                "ibu_kota" => LICENSE_TO_SUB,
+                "dinas" => LICENSE_TO_SUB,
+            );
+*/
+            
+        $this->load->view('vsspd_register_xls.php', $dt);
+    }
+    
     function cetak()
     {
         $type = 'pdf'; //$this->uri->segment(4);

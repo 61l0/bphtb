@@ -8,14 +8,14 @@ ini_set('display_errors', 1);
 
 // -- App Info
 define('APP_TITLE'  , 'DPPKAD KOTA TASIK MALAYA');
-define('APP_NAME'   , 'pbbbphtb'); //no space please
+define('APP_NAME'   , 'bphtb'); //no space please
 define('APP_CORP'   , 'OpenSIPKD');
 define('APP_VERSION', '0.1');
 define('APP_YEAR'   , '2016');
 define('LICENSE_TO' , 'KOTA TASIKMALAYA');
 define('LICENSE_TO_SUB' , 'DINAS PENGELOLAAN PENDAPATAN, KEUANGAN DAN ASET DAERAH');
 define('KD_PROPINSI','32');
-define('KD_DATI2','78'); //03 //79
+define('KD_DATI2','77'); //03 //79
 
  
 // -- Module
@@ -23,8 +23,8 @@ define('DEF_MODULE'     , 1); // 1. perencanaan 2.etc  ref => apps table
 define('SELECT_MODULE'  , TRUE);
 
 // -- Environment
-define('MY_ENV', 'production'); //development testing production
-//define('MY_ENV', 'development'); //development testing production
+//define('MY_ENV', 'production'); //development testing production
+define('MY_ENV', 'development'); //development testing production
 
 //redir --lport=3389 --cport=3389 --caddr=1921.... >&1 &
 
@@ -38,15 +38,15 @@ define('MY_MODULES_LOCATIONS' , '../modules/');
 define('DB_TYPE', 'postgre');  //mysql postgre
 define('DB_HOST', 'localhost');
 define('DB_PORT', '5432');
-define('DB_USER', 'tasik');
-define('DB_PASS', 'T4s1k');
+define('DB_USER', 'aagusti');
+define('DB_PASS', 'a');
 define('DB_NAME', 'bphtb');
 
 // -- Url
-$PROTOCOL = "https://"; //. ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on") ? "s" : "") . "://";
+$PROTOCOL = "http".((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on") ? "s" : "") . "://";
 $SERVER   = isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : $_SERVER['SERVER_NAME'];
 $SERVER   = isset($_SERVER['HTTP_X_FORWARDED_HOST']) ? $_SERVER['HTTP_X_FORWARDED_HOST'] : $SERVER; 
-$BASE_URL = "http://tasik.opensipkd.com"
+//$BASE_URL = "http://tasik.opensipkd.com"
 $BASE_URL = $PROTOCOL . $SERVER . str_replace(basename($_SERVER['SCRIPT_NAME']),"",$_SERVER['SCRIPT_NAME']);
 define('MY_BASE_URL', $BASE_URL);
 define('MY_INDEX_PAGE', '');
@@ -85,7 +85,7 @@ define('MY_SESS_TABLE_NAME', APP_NAME.'_session');
 
 // -- Etc
 define('ADMIN_NAME', 'Administrator');
-define('ADMIN_EMAIL', 'asd@ajetjet.com');
+define('ADMIN_EMAIL', 'asd@etjet.com');
 define('ADMIN_DATE_FORMAT', '%D, %d %M %Y %H:%i');
 define('ADMIN_DATE_TIME_FORMAT', 'd/m/y H:i');
 

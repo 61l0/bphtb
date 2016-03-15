@@ -253,8 +253,9 @@ if ( ! function_exists('get_config'))
 				}
 			}
 		}
-
-		return $_config[0] =& $config;
+		#var_dump($config);
+		$_config[0] =& $config;
+		return $_config[0];
 	}
 }
 
