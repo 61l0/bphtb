@@ -113,7 +113,7 @@ $(document).ready(function() {
 
         var rpt = 'bphtb_ppat_register';
         var winparams = 'location=1,status=1,scrollbars=1,resizable=no,width='+screen.width+',height='+screen.height+',menubar=no,toolbar=no,fullscreen=no';
-        window.open('<?=active_module_url($this->uri->segment(2));?>show_xls/?'+rpt + sGo+'xls/', 'Laporan', winparams);
+        window.open('<?=active_module_url($this->uri->segment(2));?>show_xls/'+rpt + sGo+'xls/', 'Laporan', winparams);
     });
 });
 </script>

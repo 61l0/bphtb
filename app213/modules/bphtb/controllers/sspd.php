@@ -1017,10 +1017,9 @@ STATUS DAFTAR:
     
     function show_xls()
     {
-      $from = date('Y-m-d', strtotime($this->uri->segment(6)));
-      $to   = date('Y-m-d', strtotime($this->uri->segment(7)));
+      $from = date('Y-m-d', strtotime($this->uri->segment(5)));
+      $to   = date('Y-m-d', strtotime($this->uri->segment(6)));
       $src  = $this->uri->segment(8);
-
       $where = " where (date(bphtb_sspd.tgl_transaksi) between '{$from}' and '{$to}') ";
 
       if($this->session->userdata('isppat'))
@@ -1056,11 +1055,13 @@ STATUS DAFTAR:
 
             $sql = $sql  . " and date(ss.tgl_transaksi) between '{$from}' and '{$to}'".$order;
 
-      
       $dt['daerah'] = LICENSE_TO;
       $dt['ibu_kota'] = LICENSE_TO_SUB;
       $dt['dinas'] = LICENSE_TO_SUB;
-      $dt['rows'] = $this->db->query($sql).result();
+      $dt['from'] = $from;
+      $dt['to'] = $to;
+      $dt['rows'] = $this->db->query($sql)->result();
+      
             
 /*            $params = array(
                 "kondisi" => $where,
